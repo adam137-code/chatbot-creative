@@ -35,8 +35,6 @@ let latestQR = '';
 let isClientReady = false;
 
 // ======== EXPRESS SERVER FOR QR ========
-const express = require('express');
-const qrcode = require('qrcode');
 const app = express();
 let latestQR = '';
 
