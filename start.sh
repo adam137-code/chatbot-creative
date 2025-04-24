@@ -18,6 +18,7 @@ apt-get update && apt-get install -y \
 
 # Install npm packages dan jalankan bot
 npm install
+npm install express qrcode
 npm uninstall puppeteer-core
 npm install puppeteer
 node index.js
