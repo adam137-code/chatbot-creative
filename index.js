@@ -6,12 +6,6 @@ const axios = require('axios');
 const express = require('express');
 const qrcode = require('qrcode');
 
-// ======== VALIDATE ENV ========
-if (!process.env.NOTION_API_KEY) {
-  console.error('❌ NOTION_API_KEY tidak ditemukan di .env');
-  process.exit(1);
-}
-
 // ======== CONFIGURATION ========
 const NOTION_API_KEY = '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';
 const DATABASE_ID = '1d9364bdbba880d39157cad14e4b939c';
