@@ -5,9 +5,9 @@ const { Client: NotionClient } = require('@notionhq/client');
 const axios = require('axios');
 
 // ======== CONFIGURATION ========
-const NOTION_API_KEY = process.env.NOTION_API_KEY;
-const DATABASE_ID = process.env.DATABASE_ID;
-const PARENT_PAGE_ID = process.env.PARENT_PAGE_ID;
+const NOTION_API_KEY = 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;
+const DATABASE_ID = 1d9364bdbba880d39157cad14e4b939c;
+const PARENT_PAGE_ID = 1d9364bdbba880d18bb0c8b037c1e718;
 const OLLAMA_MODEL = 'gemma:2b';
 
 const notion = new NotionClient({ auth: NOTION_API_KEY });
