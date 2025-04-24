@@ -1,13 +1,15 @@
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer'); // jangan pakai puppeteer-core
 
 (async () => {
   const browser = await puppeteer.launch({
-    headless: true,  // pastikan mode headless aktif
+    headless: true,
     args: [
-      '--no-sandbox', 
+      '--no-sandbox',
       '--disable-setuid-sandbox',
-      '--disable-gpu',  // Nonaktifkan GPU jika di server
-      '--remote-debugging-port=9222'  // Opsional, untuk debug
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--no-zygote',
+      '--single-process'
     ]
   });
   const page = await browser.newPage();
