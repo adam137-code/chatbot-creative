@@ -35,42 +35,37 @@ let latestQR = '';
 let isClientReady = false;
 
 // ======== EXPRESS SERVER FOR QR ========
+const express = require('express');
+const qrcode = require('qrcode');
 const app = express();
-const PORT = process.env.PORT || 3000;
+let latestQR = '';
 
+// Mendapatkan QR code dari WhatsApp
+client.on('qr', async qr => {
+  console.log('📷 QR code received! Visit /qr to scan.');
+  latestQR = qr;
+});
+
+// Endpoint untuk QR code
 app.get('/qr', async (req, res) => {
   if (!latestQR) return res.send('No QR code yet.');
-  try {
-    const qrImage = await qrcode.toDataURL(latestQR);
-    res.send(`
-      <html>
-        <body style="display:flex;justify-content:center;align-items:center;height:100vh;flex-direction:column;">
-          <h2>Scan this QR code with WhatsApp</h2>
-          <img src="${qrImage}" />
-          ${isClientReady ? '<p style="color:green;">✅ Bot is ready!</p>' : '<p style="color:orange;">⌛ Waiting for authentication...</p>'}
-        </body>
-      </html>
-    `);
-  } catch (err) {
-    res.status(500).send('Error generating QR code');
-  }
+  const qrImage = await qrcode.toDataURL(latestQR);
+  res.send(`
+    <html>
+      <body style="display:flex;justify-content:center;align-items:center;height:100vh;flex-direction:column;">
+        <h2>Scan this QR code with WhatsApp</h2>
+        <img src="${qrImage}" />
+      </body>
+    </html>
+  `);
 });
 
-app.listen(PORT, () => {
-  console.log(`🔗 QR server running on port ${PORT}`);
-  console.log(`Visit http://localhost:${PORT}/qr to scan QR code`);
+// Menjalankan server Express di port 3000
+app.listen(3000, () => {
+  console.log('🔗 Visit https://<your-railway-domain>.railway.app/qr to scan the QR code');
 });
 
-// ======== IMPROVED ERROR HANDLING ========
-process.on('unhandledRejection', (err) => {
-  console.error('❌ Unhandled Rejection:', err);
-});
 
-process.on('uncaughtException', (err) => {
-  console.error('❌ Uncaught Exception:', err);
-});
-
-// ======== WHATSAPP EVENT HANDLERS ========
 client.on('qr', async (qr) => {
   console.log('📷 QR code received! Visit /qr to scan.');
   latestQR = qr;
