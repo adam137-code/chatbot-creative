@@ -18,4 +18,6 @@ apt-get update && apt-get install -y \
 
 # Install npm packages dan jalankan bot
 npm install
+npm uninstall puppeteer-core
+npm install puppeteer
 node index.js
