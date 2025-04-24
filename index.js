@@ -18,7 +18,7 @@ const client = new Client({
     clientId: "client-1"
   }),
   puppeteer: {
-    headless: false,
+    headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
     timeout: 60000
   },
