@@ -1,24 +1,3 @@
-const puppeteer = require('puppeteer'); // jangan pakai puppeteer-core
-
-(async () => {
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-gpu',
-      '--no-zygote',
-      '--single-process'
-    ]
-  });
-  const page = await browser.newPage();
-  await page.goto('https://example.com');
-  console.log(await page.title());
-  await browser.close();
-})();
-
-
 // ======= DEPENDENCIES =======
 require('dotenv').config();
 const { Client, LocalAuth } = require('whatsapp-web.js');
