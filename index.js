@@ -1435,10 +1435,36 @@ async function sendTaskDetail(message, task) {
 }
 
 // ======== WHATSAPP EVENT HANDLERS ========
-client.on('qr', qr => {
-  console.log('📷 Scan QR code:');
-  qrcode.generate(qr, { small: true });
+const express = require('express');
+const qrcode = require('qrcode');
+const app = express();
+let latestQR = '';
+
+// Mendapatkan QR code dari WhatsApp
+client.on('qr', async qr => {
+  console.log('📷 QR code received! Visit /qr to scan.');
+  latestQR = qr;
 });
+
+// Endpoint untuk QR code
+app.get('/qr', async (req, res) => {
+  if (!latestQR) return res.send('No QR code yet.');
+  const qrImage = await qrcode.toDataURL(latestQR);
+  res.send(`
+    <html>
+      <body style="display:flex;justify-content:center;align-items:center;height:100vh;flex-direction:column;">
+        <h2>Scan this QR code with WhatsApp</h2>
+        <img src="${qrImage}" />
+      </body>
+    </html>
+  `);
+});
+
+// Menjalankan server Express di port 3000
+app.listen(3000, () => {
+  console.log('🔗 Visit https://<your-railway-domain>.railway.app/qr to scan the QR code');
+});
+
 
 client.on('ready', () => {
   console.log('🤖 Bot ready!');
