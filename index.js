@@ -36,7 +36,6 @@ let isClientReady = false;
 
 // ======== EXPRESS SERVER FOR QR ========
 const app = express();
-let latestQR = '';
 
 // Mendapatkan QR code dari WhatsApp
 client.on('qr', async qr => {
