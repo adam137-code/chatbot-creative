@@ -1,3 +1,22 @@
+const puppeteer = require('puppeteer-core');
+
+(async () => {
+  const browser = await puppeteer.launch({
+    headless: true,  // pastikan mode headless aktif
+    args: [
+      '--no-sandbox', 
+      '--disable-setuid-sandbox',
+      '--disable-gpu',  // Nonaktifkan GPU jika di server
+      '--remote-debugging-port=9222'  // Opsional, untuk debug
+    ]
+  });
+  const page = await browser.newPage();
+  await page.goto('https://example.com');
+  console.log(await page.title());
+  await browser.close();
+})();
+
+
 // ======= DEPENDENCIES =======
 require('dotenv').config();
 const { Client, LocalAuth } = require('whatsapp-web.js');
