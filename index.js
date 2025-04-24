@@ -1,7 +1,6 @@
 // ======= DEPENDENCIES =======
 require('dotenv').config();
 const { Client, LocalAuth } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal');
 const { Client: NotionClient } = require('@notionhq/client');
 const axios = require('axios');
 
